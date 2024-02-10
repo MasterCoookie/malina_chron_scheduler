@@ -23,6 +23,13 @@ class TestCronScheduler(unittest.TestCase):
             (0, 1, 1, [True, True, True, True, True, True, True]),
             (1, 1, 1, [False, False, False, False, False, False, False]),
             (1, 2, 1, [True, True, True, True, True, True, True]),
+            (-1, 1, 1, [True, True, True, True, True, True, True]),
+            (1, 23, 25, [True, True, True, True, True, True, True]),
+            (1, 1, 1, [True, True, True, True, True, True]),
+            (1, 1, 1, [True, True, True, True, True, True, True, True]),
+            (1, 25, 26, [True, False, False, False, False, False, False]),
+            (1, -1, 1, [True, False, False, False, False, False, False]),
+            (1, 1, -1, [True, True, True, True, True, True, False]),
         ]
 
         for args in args_list:
