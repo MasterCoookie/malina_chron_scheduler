@@ -5,7 +5,15 @@ try:
     host, user, passwd = get_credentials()
     session = ftplib.FTP(host, user, passwd)
     file = open('jajo2.png', 'rb')
-    code = session.storbinary('STOR jajo.png', file)
+
+    folder_creation_code = session.mkd('floder_na_cam')
+    if folder_creation_code.startswith('257'):
+        print(f'Folder created successfully. Response code: {folder_creation_code}')
+    else:
+        print(f'Folder creation failed. Response code: {folder_creation_code}')
+        # raise exception here
+
+    code = session.storbinary('STOR floder_na_cam/jajo.png', file)
     if code.startswith('226'):
         print(f'File uploaded successfully. Response code: {code}')
     else:
