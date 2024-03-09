@@ -1,9 +1,12 @@
 import time
 import os
+
 from datetime import datetime
 from argparse import ArgumentParser
 from libcamera import controls
 from picamera2 import Picamera2, Preview
+
+from ftp_sender import upload_folder
 
 print("Starting...")
 
@@ -13,8 +16,6 @@ exposures = [1000000, 250000, 62500, 16000, 4000, 1000, 250, 80]
 parser = ArgumentParser()
 parser.add_argument("-f", "--file", dest="filename",
                     help="write report to FILE", metavar="FILE")
-parser.add_argument("-e", "--exposure", dest="exposure",
-                    help="exposure", metavar="EXPOSURE")
 args = parser.parse_args()
 
 picam2 = Picamera2()
@@ -40,3 +41,6 @@ for i, exposure in enumerate(exposures):
 print("Done")
 picam2.stop()
 picam2.stop_preview()
+
+print("Uploading to FTP...")
+upload_folder(dirname)
