@@ -1,4 +1,5 @@
 import time
+import os
 from datetime import datetime
 from argparse import ArgumentParser
 from libcamera import controls
@@ -26,12 +27,15 @@ picam2.configure(preview_config)
 picam2.start()
 time.sleep(2)
 
+dirname = f'./{args.filename}_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'
+os.mkdir(dirname)
+
 for i, exposure in enumerate(exposures):
     print(f"Capturing image {i} with exposure {exposure}")
     controls = {"AnalogueGain": 1.0, "ExposureTime": exposure}
     picam2.set_controls(controls)
     time.sleep(2)
-    picam2.capture_file(f'{args.filename}_{datetime.now()}_index{i}_exposure{exposure}.jpg', wait=True)
+    picam2.capture_file(f'{dirname}/index{i}_exposure{exposure}.jpg', wait=True)
 
 print("Done")
 picam2.stop()
