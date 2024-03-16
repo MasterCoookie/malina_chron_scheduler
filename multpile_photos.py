@@ -1,6 +1,6 @@
 import time
 import os
-
+import json
 from datetime import datetime
 from argparse import ArgumentParser
 from libcamera import controls
@@ -10,8 +10,7 @@ from ftp_sender import upload_folder
 
 print("Starting...")
 
-# exposures = [1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000]
-exposures = [1000000, 250000, 62500, 16000, 4000, 1000, 250, 80]
+exposures = json.load(open('exposures.json')).get('exposures')
 
 parser = ArgumentParser()
 parser.add_argument("-f", "--file", dest="filename",

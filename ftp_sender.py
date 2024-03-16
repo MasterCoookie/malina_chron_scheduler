@@ -7,7 +7,7 @@ def upload_folder(folder_name):
         host, user, passwd = get_credentials()
         session = ftplib.FTP(host, user, passwd)
         folder_creation_code = session.mkd(folder_name)
-        if folder_creation_code.startswith('257'):
+        if folder_creation_code != folder_name:
             print(f'Folder created successfully. Response code: {folder_creation_code}')
         else:
             print(f'Folder creation failed. Response code: {folder_creation_code}')
