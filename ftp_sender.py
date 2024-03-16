@@ -2,7 +2,8 @@ import os
 import ftplib
 from secret import get_credentials
 
-def upload_folder(folder_name):
+def upload_folder(folder_path: str):
+    folder_name  = os.path.basename(folder_path)
     try:
         host, user, passwd = get_credentials()
         session = ftplib.FTP(host, user, passwd)
@@ -12,8 +13,8 @@ def upload_folder(folder_name):
         else:
             print(f'Folder creation failed. Response code: {folder_creation_code}')
 
-        for file in os.listdir(folder_name):
-            file_path = f'{folder_name}/{file}'
+        for file in os.listdir(folder_path):
+            file_path = f'{folder_path}/{file}'
             if os.path.isfile(file_path):
                 code = session.storbinary(f'STOR {folder_name}/{file}', open(file_path, 'rb'))
                 if code.startswith('226'):
