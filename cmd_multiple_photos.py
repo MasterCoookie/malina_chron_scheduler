@@ -17,7 +17,7 @@ os.mkdir(dirname)
 
 for i, exposure in enumerate(exposures):
     print(f"Taking picture {i+1}/{len(exposures)} with exposure {exposure}...")
-    os.system(f"libcamera-still -t 5000 -n -o dupa_text_{i}_{exposure}.jpg --gain 1.0 --shutter {exposure}")
+    os.system(f"libcamera-still -t 5000 -n -o {dirname}/dupa_text_{i}_{exposure}.jpg --gain 1.0 --shutter {exposure}")
 
 print("Done")
 print("Uploading to FTP...")
