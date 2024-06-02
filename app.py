@@ -11,8 +11,12 @@ if __name__ == '__main__':
     cron = CronTab(user='pi')
     job = cron.new(command='python3 ~/malina_cron_scheduler/crontab_call_test.py')
     
-    
-    job.setall(f'{minutes} {hours} * * {weekdays}')
-    cron.write()
+    try:
+        job.setall(f'{minutes} {hours} * * {weekdays}')
+        cron.write()
+    except KeyError as e:
+        print(f'Error: {e}')
+        print('Check your input and try again')
+        exit(1)
     print("Crontab created successfully:")
     print(job)
