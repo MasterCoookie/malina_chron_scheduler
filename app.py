@@ -14,9 +14,10 @@ if __name__ == '__main__':
     try:
         job.setall(f'{minutes} {hours} * * {weekdays}')
         cron.write()
-    except KeyError as e:
+    except (KeyError, ValueError) as e:
         print(f'Error: {e}')
         print('Check your input and try again')
         exit(1)
+
     print("Crontab created successfully:")
     print(job)
