@@ -21,12 +21,13 @@ try:
     os.mkdir(dirname)
 
     for i, exposure in enumerate(exposures):
-        print(f"Taking picture {i+1}/{len(exposures)} with exposure {exposure}...")
+        logger.info(f"Taking picture {i+1}/{len(exposures)} with exposure {exposure}...")
         file_path = os.path.join(dirname, f"dupa_text_{i}_{exposure}.jpg")
-        os.system(f"libcamera-still -n -o {file_path} --gain 1.0 --shutter {exposure}")
+        log_path = os.path.join(dirname, "log.txt")
+        os.system(f"libcamera-still -n -o {file_path} --gain 1.0 --shutter {exposure} >> {log_path}")
 
-    print("Done")
-    print("Uploading to FTP...")
+    logger.info("Done taking pictures")
+    logger.info("Uploading to FTP...")
     upload_folder(dirname)
 except Exception as e:
     logger.error(f"Error: {e}")
