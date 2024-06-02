@@ -9,7 +9,7 @@ if __name__ == '__main__':
     print('Specify minutes active, 0-59:')
     minutes = input('0 for the start of the hour, 15-30 for minutes from 15 to 30, * for every minute:\n')
     cron = CronTab(user='pi')
-    job = cron.new(command='python3 ~/malina_cron_scheduler/crontab_call_test.py')
+    job = cron.new(command='python3 ~/malina_cron_scheduler/cmd_multiple_photos.py')
     
     try:
         job.setall(f'{minutes} {hours} * * {weekdays}')
