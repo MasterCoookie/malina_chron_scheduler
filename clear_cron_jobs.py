@@ -1,4 +1,4 @@
-import CronTab
+from crontab import CronTab
 
 cron = CronTab(user='pi')
 for job in cron:
