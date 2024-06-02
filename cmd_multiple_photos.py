@@ -12,7 +12,7 @@ print("Starting...")
 exposures = json.load(open(os.path.join(script_folder, 'exposures.json'))).get('exposures')
 print(f"Taking {len(exposures)} pictures with exposures:", exposures)
 
-dirname = os.path.join("./", f'testy_cmd_{datetime.now().strftime("%Y-%m-%d_%H:%M:%S")}')
+dirname = os.path.join("~", "malina_cron_scheduler" f'testy_cron_{datetime.now().strftime("%Y-%m-%d_%H:%M:%S")}')
 os.mkdir(dirname)
 
 for i, exposure in enumerate(exposures):
